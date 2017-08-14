@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply from: '../config/quality/quality.gradle'
 
 android {
     compileSdkVersion 26
@@ -89,4 +90,9 @@ dependencies {
     testCompile ('org.robolectric:robolectric:3.1.2') {
         exclude group: 'com.google.guava', module: 'guava'
     }
+}
+
+// Log out test results to console
+tasks.matching { it instanceof Test }.all {
+    testLogging.events = ["failed", "passed", "skipped"]
 }
